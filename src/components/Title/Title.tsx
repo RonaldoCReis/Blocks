@@ -1,5 +1,5 @@
 import React, { ReactHTMLElement } from 'react';
-import Styles from './Title.module.scss';
+import styles from './Title.module.scss';
 
 export interface titleTypes {
   children: string;
@@ -8,7 +8,7 @@ export interface titleTypes {
 
 const Text = ({ children, color }: titleTypes) => {
   return (
-    <p style={{ color }} className={Styles.text}>
+    <p style={{ color }} className={styles.title}>
       {children}
     </p>
   );

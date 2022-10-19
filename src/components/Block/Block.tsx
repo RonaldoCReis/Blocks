@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
+import styles from './Block.module.scss';
 
-const Block = () => {
-  return <div>Block</div>;
+interface blockTypes {
+  children: ReactNode;
+  color?: string;
+}
+
+const Block = ({ children, color = '#7B7834' }: blockTypes) => {
+  return (
+    <div style={{ background: color }} className={styles.block}>
+      {children}
+    </div>
+  );
 };
 
 export default Block;
