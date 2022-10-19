@@ -1,0 +1,43 @@
+@import '../../util.scss';
+
+.button {
+  font-family: $fontFamily;
+  font-size: 16px;
+  font-weight: bold;
+  background: $gray300;
+  line-height: 1em;
+  padding: 15px 30px 15px 15px;
+  border: none;
+  color: #fff;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  gap: 7px;
+  box-shadow: $boxShadow;
+  height: 50px;
+  &:hover {
+    background: $gray200;
+    & > svg {
+      animation: spin forwards 0.6s ease-in-out;
+    }
+  }
+  & svg {
+    width: 24px;
+    height: 24px;
+
+    & * {
+      stroke-width: 24px;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

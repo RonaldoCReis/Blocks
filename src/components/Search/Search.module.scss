@@ -1,0 +1,28 @@
+@import '../../util.scss';
+
+.container {
+  display: flex;
+  align-items: center;
+  background: $gray900;
+  height: 50px;
+  padding: 0 15px;
+  border-radius: 15px;
+  box-shadow: $boxShadow;
+  color: $gray100;
+  gap: 15px;
+  &:focus-within {
+    box-shadow: 0 0 0 2px $gray100;
+  }
+}
+
+.input {
+  flex: 1;
+  background: transparent;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  height: 100%;
+  &:focus {
+    outline: none;
+  }
+}
