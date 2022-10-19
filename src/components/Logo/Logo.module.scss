@@ -1,0 +1,17 @@
+@import '../../util.scss';
+
+.logo {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  & h1 {
+    font-family: $fontFamily;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1em;
+  }
+  & svg > * {
+    stroke-width: 24;
+  }
+}
