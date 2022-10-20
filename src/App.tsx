@@ -1,8 +1,8 @@
 import React from 'react';
-import './reset.css';
+import Modal from './components/Modal';
 
 const App = () => {
-  return <div>App</div>;
+  return <Modal />;
 };
 
 export default App;

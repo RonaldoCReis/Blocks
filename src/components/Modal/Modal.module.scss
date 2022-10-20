@@ -1,0 +1,84 @@
+@import '../../util.scss';
+
+.backdrop {
+  width: 100vw;
+  height: 100vh;
+  background: rgb(30, 31, 39, 60%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: 80vw;
+  max-width: 500px;
+  height: 80vh;
+  background: #34627b;
+  border-radius: 15px;
+  box-shadow: $boxShadow;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  gap: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.title,
+.text {
+  background: transparent;
+  border: none;
+  resize: none;
+  color: #fff;
+  font-size: $fontSizeBlock;
+  font-family: $fontFamily;
+  // caret-color: transparent;
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.title {
+  font-weight: bold;
+}
+
+.text {
+  flex: 1;
+  line-height: 26px;
+}
+
+.footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background: #1e1f27;
+  padding: 5px 30px;
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+  align-items: center;
+}
+
+.delete {
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background: #4b4c52;
+  }
+}
+
+.changeColor {
+  display: flex;
+  gap: 15px;
+}
