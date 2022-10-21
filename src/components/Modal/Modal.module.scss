@@ -1,6 +1,9 @@
 @import '../../util.scss';
 
 .backdrop {
+  position: fixed;
+  top: 0;
+  height: 0;
   width: 100vw;
   height: 100vh;
   background: rgb(30, 31, 39, 60%);

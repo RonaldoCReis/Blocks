@@ -10,6 +10,8 @@
   box-shadow: $boxShadow;
   color: $gray100;
   gap: 15px;
+  max-width: 420px;
+  margin-bottom: 52px;
   & svg > * {
     stroke-width: 18;
   }

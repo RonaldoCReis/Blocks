@@ -1,12 +1,23 @@
 import { Trash } from 'phosphor-react';
 import React from 'react';
+import { useRecoilState } from 'recoil';
+import { modalState } from '../../state/atoms';
 import FilterBall from '../FilterBall';
 import styles from './Modal.module.scss';
 
 const Modal = () => {
+  const [modal, setModal] = useRecoilState(modalState);
+  if (!modal.isOpen) return null;
+  function closeDialog() {
+    setModal({ ...modal, isOpen: false });
+  }
   return (
-    <div className={styles.backdrop}>
-      <div className={styles.modal}>
+    <div onClick={closeDialog} role="dialog" className={styles.backdrop}>
+      <div
+        role="dialog-inner"
+        onClick={(event) => event.stopPropagation()}
+        className={styles.modal}
+      >
         <input placeholder="Title" className={styles.title}></input>
         <textarea placeholder="A great idea" className={styles.text}></textarea>
         <div className={styles.footer}>
