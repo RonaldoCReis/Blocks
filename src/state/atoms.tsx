@@ -17,8 +17,8 @@ export const blocksState = atom<blockType[]>({
   default: [
     {
       id: 1,
-      title: 'Testing',
-      text: 'The first Block just for testing',
+      title: 'Hello!',
+      text: 'Welcome to Blocks',
       color: '#53347B',
     },
   ],

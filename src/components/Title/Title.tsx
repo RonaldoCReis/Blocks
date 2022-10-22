@@ -8,9 +8,9 @@ export interface titleTypes {
 
 const Text = ({ children, color }: titleTypes) => {
   return (
-    <p style={{ color }} className={styles.title}>
+    <h2 role="title" style={{ color }} className={`title ${styles.title}`}>
       {children}
-    </p>
+    </h2>
   );
 };
 

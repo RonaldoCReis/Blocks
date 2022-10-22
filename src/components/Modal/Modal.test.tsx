@@ -14,16 +14,6 @@ describe('Dialog', () => {
     );
   });
 
-  it('Should open when button is clicked', () => {
-    //Open Dialog
-    const button = screen.getByRole('button');
-    fireEvent.click(button);
-
-    // Check if it's open
-    const dialog = screen.getByRole('dialog');
-    expect(dialog).toBeInTheDocument();
-  });
-
   it('Must close when click on the backdrop', () => {
     //Open Dialog
     const button = screen.getByRole('button');

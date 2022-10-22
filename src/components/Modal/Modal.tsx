@@ -1,40 +1,45 @@
 import { Trash } from 'phosphor-react';
 import React, { useEffect, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { blocksState, blockType, modalState } from '../../state/atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  activeIdState,
+  blocksState,
+  blockType,
+  modalState,
+} from '../../state/atoms';
 import { useGetNewBlock } from '../../state/hooks/useGetNewBlock';
 import FilterBall from '../FilterBall';
 import styles from './Modal.module.scss';
 
-interface modalTypes {
-  modalId: number;
-}
-
-const Modal = ({ modalId }: modalTypes) => {
+const Modal = () => {
   const [modal, setModal] = useRecoilState(modalState);
   const [blocks, setBlocks] = useRecoilState(blocksState);
+
+  const modalId = useRecoilValue(activeIdState);
 
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [activeBlock, setActiveBlock] = useState<blockType>(useGetNewBlock());
-  const [activeBlockIndex, setActiveBlockIndex] = useState(
-    blocks.findIndex((item) => item.id === modalId)
-  );
+  const [activeBlockIndex, setActiveBlockIndex] = useState(-1);
   const [newId, setNewId] = useState(0);
   const [localBlock, setLocalBlock] = useState<blockType | null>(null);
   useEffect(() => {
-    console.log(blocks);
+    console.log('id: ' + modalId);
+    setActiveBlockIndex(blocks.findIndex((item) => item.id === modalId));
+  }, [modalId]);
 
+  useEffect(() => {
     if (activeBlockIndex !== -1) {
-      console.log(activeBlockIndex);
+      // console.log(activeBlockIndex);
       setActiveBlock(blocks[activeBlockIndex]);
       console.log('existe');
+      setNewId(blocks[activeBlockIndex].id);
     } else {
-      setActiveBlockIndex(blocks.length);
+      // setActiveBlockIndex(blocks.length);
       setNewId(blocks.length + 1);
       console.log('n existe');
     }
-  }, [modalId]);
+  }, [activeBlockIndex]);
 
   useEffect(() => {
     setTitle(activeBlock.title);
@@ -52,7 +57,11 @@ const Modal = ({ modalId }: modalTypes) => {
   function closeDialog() {
     if (text !== '' && title !== '') {
       const newBlocks = [...blocks];
-      if (localBlock) newBlocks[activeBlockIndex] = localBlock;
+      if (activeBlockIndex !== -1) {
+        if (localBlock) newBlocks[activeBlockIndex] = localBlock;
+      } else {
+        if (localBlock) newBlocks[blocks.length] = localBlock;
+      }
       setBlocks(newBlocks);
     }
 

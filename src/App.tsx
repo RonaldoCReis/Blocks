@@ -32,14 +32,14 @@ const App = () => {
         <Button>Create block</Button>
         <div className={styles.blocks}>
           {blocks.map((block) => (
-            <Block color={block.color} key={block.id}>
+            <Block id={block.id} color={block.color} key={block.id}>
               <Title>{block.title}</Title>
               <Text>{block.text}</Text>
             </Block>
           ))}
         </div>
       </main>
-      {modal && <Modal modalId={activeId} />}
+      {modal && <Modal />}
     </div>
   );
 };
