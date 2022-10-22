@@ -8,40 +8,39 @@ import styles from './App.module.scss';
 import Block from './components/Block';
 import Title from './components/Title';
 import Text from './components/Text';
-import { RecoilRoot, useRecoilState, useRecoilValue } from 'recoil';
-
+import { RecoilRoot, useRecoilValue } from 'recoil';
+import { activeIdState, blocksState, modalState } from './state/atoms';
 const App = () => {
+  const blocks = useRecoilValue(blocksState);
+  const activeId = useRecoilValue(activeIdState);
+  const modal = useRecoilValue(modalState);
+
   return (
-    <RecoilRoot>
-      <div className={styles.app}>
-        <aside>
-          <Logo />
-          <div className={styles.filter}>
-            <FilterBall />
-            <FilterBall />
-            <FilterBall />
-            <FilterBall />
-            <FilterBall />
-          </div>
-          xw
-        </aside>
-        <main className={styles.main}>
-          <Search />
-          <Button>Create block</Button>
-          <div className={styles.blocks}>
-            <Block>
-              <Title>Titulo</Title>
-              <Text>Block text</Text>
+    <div className={styles.app}>
+      <aside>
+        <Logo />
+        <div className={styles.filter}>
+          <FilterBall />
+          <FilterBall />
+          <FilterBall />
+          <FilterBall />
+          <FilterBall />
+        </div>
+      </aside>
+      <main className={styles.main}>
+        <Search />
+        <Button>Create block</Button>
+        <div className={styles.blocks}>
+          {blocks.map((block) => (
+            <Block color={block.color} key={block.id}>
+              <Title>{block.title}</Title>
+              <Text>{block.text}</Text>
             </Block>
-            <Block>
-              <Title>Titulo</Title>
-              <Text>Block text</Text>
-            </Block>
-          </div>
-        </main>
-        <Modal />
-      </div>
-    </RecoilRoot>
+          ))}
+        </div>
+      </main>
+      {modal && <Modal modalId={activeId} />}
+    </div>
   );
 };
 

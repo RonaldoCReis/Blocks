@@ -1,8 +1,8 @@
 import React, { MouseEventHandler, ReactHTMLElement } from 'react';
 import Styles from './Button.module.scss';
 import { PlusCircle } from 'phosphor-react';
-import { useSetRecoilState } from 'recoil';
-import { modalState } from '../../state/atoms';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { activeIdState, modalState } from '../../state/atoms';
 
 export interface buttonTypes {
   children: string;
@@ -10,16 +10,12 @@ export interface buttonTypes {
 }
 
 const Button = ({ children, color }: buttonTypes) => {
+  const setActive = useSetRecoilState(activeIdState);
   const setModal = useSetRecoilState(modalState);
   const openModal = (event: any) => {
     event.preventDefault();
-    setModal({
-      isOpen: true,
-      text: '',
-      title: '',
-      id: 0,
-      color: '',
-    });
+    setActive(0);
+    setModal(true);
   };
   return (
     <button onClick={openModal} style={{ color }} className={Styles.button}>

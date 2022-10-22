@@ -8,7 +8,7 @@ interface blockTypes {
 
 const Block = ({ children, color = '#7B7834' }: blockTypes) => {
   return (
-    <div style={{ background: color }} className={styles.block}>
+    <div role="notepad" style={{ background: color }} className={styles.block}>
       {children}
     </div>
   );
