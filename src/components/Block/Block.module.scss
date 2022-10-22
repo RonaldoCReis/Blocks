@@ -6,4 +6,6 @@
   border-radius: 15px;
   box-shadow: $boxShadow;
   padding: 30px;
+  overflow: auto;
+  white-space: pre-wrap;
 }
