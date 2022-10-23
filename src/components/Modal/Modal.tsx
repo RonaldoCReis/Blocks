@@ -5,6 +5,7 @@ import {
   activeIdState,
   blocksState,
   blockType,
+  colorsState,
   modalState,
 } from '../../state/atoms';
 import { useGetNewBlock } from '../../state/hooks/useGetNewBlock';
@@ -21,6 +22,8 @@ const Modal = () => {
   const [activeBlockIndex, setActiveBlockIndex] = useState(-1);
   const [newId, setNewId] = useState(0);
   const [localBlock, setLocalBlock] = useState<blockType | null>(null);
+  const colors = useRecoilValue(colorsState);
+  const [color, setColor] = useState(colors[0]);
 
   useEffect(() => {
     console.log('id: ' + modalId);
@@ -41,6 +44,7 @@ const Modal = () => {
   useEffect(() => {
     setTitle(activeBlock.title);
     setText(activeBlock.text);
+    setColor(activeBlock.color);
   }, [activeBlock]);
 
   useEffect(() => {
@@ -48,9 +52,11 @@ const Modal = () => {
       ...activeBlock,
       title,
       text,
+      color,
       id: newId,
     });
-  }, [title, text]);
+    console.log(color);
+  }, [title, text, color]);
 
   function closeDialog() {
     if (text !== '' && title !== '') {
@@ -76,7 +82,7 @@ const Modal = () => {
   return (
     <div onClick={closeDialog} role="dialog" className={styles.backdrop}>
       <div
-        style={{ background: activeBlock.color }}
+        style={{ background: localBlock?.color }}
         role="dialog-inner"
         onClick={(event) => event.stopPropagation()}
         className={styles.modal}
@@ -97,10 +103,17 @@ const Modal = () => {
         ></textarea>
         <div className={styles.footer}>
           <div className={styles.changeColor}>
-            <FilterBall color="#7B7834" size={30} />
-            <FilterBall color="#7B4E34" size={30} />
-            <FilterBall color="#347B59" size={30} />
-            <FilterBall color="#53347B" size={30} />
+            {colors.map((color) => (
+              <FilterBall
+                click={() => {
+                  console.log(color);
+                  setColor(color);
+                }}
+                size={30}
+                key={color}
+                color={color}
+              />
+            ))}
           </div>
           <button
             role="delete-button"

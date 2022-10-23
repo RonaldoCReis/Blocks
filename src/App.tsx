@@ -9,22 +9,26 @@ import Block from './components/Block';
 import Title from './components/Title';
 import Text from './components/Text';
 import { RecoilRoot, useRecoilValue } from 'recoil';
-import { activeIdState, blocksState, modalState } from './state/atoms';
+import {
+  activeIdState,
+  blocksState,
+  colorsState,
+  modalState,
+} from './state/atoms';
 const App = () => {
   const blocks = useRecoilValue(blocksState);
   const activeId = useRecoilValue(activeIdState);
   const modal = useRecoilValue(modalState);
+  const colors = useRecoilValue(colorsState);
 
   return (
     <div className={styles.app}>
       <aside>
         <Logo />
         <div className={styles.filter}>
-          <FilterBall />
-          <FilterBall />
-          <FilterBall />
-          <FilterBall />
-          <FilterBall />
+          {colors.map((color) => (
+            <FilterBall key={color} color={color} />
+          ))}
         </div>
       </aside>
       <main className={styles.main}>

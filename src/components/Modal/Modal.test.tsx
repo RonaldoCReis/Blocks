@@ -1,9 +1,8 @@
 import { fireEvent, render, renderHook, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { RecoilRoot } from 'recoil';
-import { describe, it, expect, vi, Vitest } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import App from '../../App';
-import { useBlocksState } from '../../state/hooks/useBlocksState';
 
 describe('Dialog', () => {
   beforeEach(() => {

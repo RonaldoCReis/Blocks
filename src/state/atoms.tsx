@@ -24,6 +24,11 @@ export const blocksState = atom<blockType[]>({
   ],
 });
 
+export const colorsState = atom<string[]>({
+  key: 'colorsState',
+  default: ['#34627B', '#347B59', '#53347B', '#7B4E34', '#697B34'],
+});
+
 export const modalState = atom({
   key: 'modalState',
   default: false,
