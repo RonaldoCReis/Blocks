@@ -74,7 +74,7 @@ const Modal = () => {
   }
 
   return (
-    <dialog onClick={closeDialog} role="dialog" className={styles.backdrop}>
+    <div onClick={closeDialog} role="dialog" className={styles.backdrop}>
       <div
         style={{ background: activeBlock.color }}
         role="dialog-inner"
@@ -102,12 +102,16 @@ const Modal = () => {
             <FilterBall color="#347B59" size={30} />
             <FilterBall color="#53347B" size={30} />
           </div>
-          <button onClick={deleteBlock} className={styles.delete}>
+          <button
+            role="delete-button"
+            onClick={deleteBlock}
+            className={styles.delete}
+          >
             <Trash size={30} />
           </button>
         </div>
       </div>
-    </dialog>
+    </div>
   );
 };
 

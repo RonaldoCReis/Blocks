@@ -55,8 +55,8 @@ describe('Dialog', () => {
     const dialog = screen.getByRole('dialog');
     fireEvent.click(dialog);
 
+    //Compare length
     blocks = screen.getAllByRole('notepad');
-
     expect(blocks.length).toBe(initialLenght + 1);
   });
 
@@ -73,8 +73,26 @@ describe('Dialog', () => {
     const dialog = screen.getByRole('dialog');
     fireEvent.click(dialog);
 
+    //Compare length
     blocks = screen.getAllByRole('notepad');
-
     expect(blocks.length).toBe(initialLenght);
+  });
+
+  it('Should delete block when click delete', () => {
+    //Get number of blocks
+    let blocks = screen.getAllByRole('notepad');
+    const initialLenght = blocks.length;
+
+    //Open Dialog
+    const button = screen.getByRole('button');
+    fireEvent.click(button);
+
+    //Click on delete button
+    const deleteButton = screen.getByRole('delete-button');
+    fireEvent.click(deleteButton);
+
+    //Compare length
+    blocks = screen.queryAllByRole('notepad');
+    expect(blocks.length).toBe(initialLenght - 1);
   });
 });
