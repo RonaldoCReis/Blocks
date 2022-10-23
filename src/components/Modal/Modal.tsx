@@ -14,15 +14,14 @@ import styles from './Modal.module.scss';
 const Modal = () => {
   const [modal, setModal] = useRecoilState(modalState);
   const [blocks, setBlocks] = useRecoilState(blocksState);
-
   const modalId = useRecoilValue(activeIdState);
-
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [activeBlock, setActiveBlock] = useState<blockType>(useGetNewBlock());
   const [activeBlockIndex, setActiveBlockIndex] = useState(-1);
   const [newId, setNewId] = useState(0);
   const [localBlock, setLocalBlock] = useState<blockType | null>(null);
+
   useEffect(() => {
     console.log('id: ' + modalId);
     setActiveBlockIndex(blocks.findIndex((item) => item.id === modalId));
@@ -30,12 +29,10 @@ const Modal = () => {
 
   useEffect(() => {
     if (activeBlockIndex !== -1) {
-      // console.log(activeBlockIndex);
       setActiveBlock(blocks[activeBlockIndex]);
       console.log('existe');
       setNewId(blocks[activeBlockIndex].id);
     } else {
-      // setActiveBlockIndex(blocks.length);
       setNewId(blocks.length + 1);
       console.log('n existe');
     }
@@ -54,6 +51,7 @@ const Modal = () => {
       id: newId,
     });
   }, [title, text]);
+
   function closeDialog() {
     if (text !== '' && title !== '') {
       const newBlocks = [...blocks];
@@ -68,8 +66,15 @@ const Modal = () => {
     setModal(false);
   }
 
+  function deleteBlock() {
+    const newBlocks = [...blocks];
+    newBlocks.splice(activeBlockIndex, 1);
+    setBlocks(newBlocks);
+    setModal(false);
+  }
+
   return (
-    <div onClick={closeDialog} role="dialog" className={styles.backdrop}>
+    <dialog onClick={closeDialog} role="dialog" className={styles.backdrop}>
       <div
         style={{ background: activeBlock.color }}
         role="dialog-inner"
@@ -97,12 +102,12 @@ const Modal = () => {
             <FilterBall color="#347B59" size={30} />
             <FilterBall color="#53347B" size={30} />
           </div>
-          <button className={styles.delete}>
+          <button onClick={deleteBlock} className={styles.delete}>
             <Trash size={30} />
           </button>
         </div>
       </div>
-    </div>
+    </dialog>
   );
 };
 
