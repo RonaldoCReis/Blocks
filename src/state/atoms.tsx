@@ -43,3 +43,8 @@ export const filterState = atom({
   key: 'filterState',
   default: '',
 });
+
+export const filterColorState = atom({
+  key: 'filterColorState',
+  default: '',
+});

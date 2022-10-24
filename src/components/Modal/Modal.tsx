@@ -103,15 +103,16 @@ const Modal = () => {
         ></textarea>
         <div className={styles.footer}>
           <div className={styles.changeColor}>
-            {colors.map((color) => (
+            {colors.map((colorBall) => (
               <FilterBall
                 click={() => {
-                  console.log(color);
-                  setColor(color);
+                  console.log(colorBall);
+                  setColor(colorBall);
                 }}
+                active={colorBall === color}
                 size={30}
-                key={color}
-                color={color}
+                key={colorBall}
+                color={colorBall}
               />
             ))}
           </div>

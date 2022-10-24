@@ -8,12 +8,13 @@ import styles from './App.module.scss';
 import Block from './components/Block';
 import Title from './components/Title';
 import Text from './components/Text';
-import { RecoilRoot, useRecoilValue } from 'recoil';
+import { RecoilRoot, useRecoilState, useRecoilValue } from 'recoil';
 import {
   activeIdState,
   blocksState,
   blockType,
   colorsState,
+  filterColorState,
   filterState,
   modalState,
 } from './state/atoms';
@@ -23,8 +24,16 @@ const App = () => {
   const modal = useRecoilValue(modalState);
   const colors = useRecoilValue(colorsState);
   const filter = useRecoilValue(filterState);
+  const [filterColor, setFilterColor] = useRecoilState(filterColorState);
   const [filterBlocks, setFilterBlocks] = useState<blockType[]>([]);
 
+  function colorFilter(color: string) {
+    if (filterColor !== color) {
+      setFilterColor(color);
+    } else {
+      setFilterColor('');
+    }
+  }
   useEffect(() => {
     const text = blocks.filter((block) => {
       if (filter) {
@@ -36,15 +45,28 @@ const App = () => {
         return true;
       }
     });
-    setFilterBlocks(text);
-  }, [filter, blocks]);
+
+    const color = text.filter((block) => {
+      if (filterColor) {
+        return block.color === filterColor;
+      } else {
+        return true;
+      }
+    });
+    setFilterBlocks(color);
+  }, [filter, blocks, filterColor]);
   return (
     <div className={styles.app}>
       <aside>
         <Logo />
         <div className={styles.filter}>
           {colors.map((color) => (
-            <FilterBall key={color} color={color} />
+            <FilterBall
+              active={color === filterColor}
+              click={() => colorFilter(color)}
+              key={color}
+              color={color}
+            />
           ))}
         </div>
       </aside>
