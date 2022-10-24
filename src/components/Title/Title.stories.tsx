@@ -8,7 +8,6 @@ export default {
 
   args: {
     children: 'Lorem ipsum',
-    color: '#1E1F27',
   },
 } as Meta<typeof Title>;
 
