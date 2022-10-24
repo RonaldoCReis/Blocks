@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from './components/Button';
 import FilterBall from './components/FilterBall';
 import Logo from './components/Logo';
@@ -12,7 +12,9 @@ import { RecoilRoot, useRecoilValue } from 'recoil';
 import {
   activeIdState,
   blocksState,
+  blockType,
   colorsState,
+  filterState,
   modalState,
 } from './state/atoms';
 const App = () => {
@@ -20,7 +22,22 @@ const App = () => {
   const activeId = useRecoilValue(activeIdState);
   const modal = useRecoilValue(modalState);
   const colors = useRecoilValue(colorsState);
+  const filter = useRecoilValue(filterState);
+  const [filterBlocks, setFilterBlocks] = useState<blockType[]>([]);
 
+  useEffect(() => {
+    const text = blocks.filter((block) => {
+      if (filter) {
+        return (
+          block.text.toLowerCase().includes(filter) ||
+          block.title.toLowerCase().includes(filter)
+        );
+      } else {
+        return true;
+      }
+    });
+    setFilterBlocks(text);
+  }, [filter, blocks]);
   return (
     <div className={styles.app}>
       <aside>
@@ -35,7 +52,7 @@ const App = () => {
         <Search />
         <Button>Create block</Button>
         <div className={styles.blocks}>
-          {blocks.map((block) => (
+          {filterBlocks.map((block) => (
             <Block id={block.id} color={block.color} key={block.id}>
               {block.title && <Title>{block.title}</Title>}
               {block.text && <Text>{block.text}</Text>}

@@ -38,3 +38,8 @@ export const activeIdState = atom({
   key: 'activeIdState',
   default: 0,
 });
+
+export const filterState = atom({
+  key: 'filterState',
+  default: '',
+});
