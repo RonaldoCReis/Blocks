@@ -37,8 +37,8 @@ const App = () => {
         <div className={styles.blocks}>
           {blocks.map((block) => (
             <Block id={block.id} color={block.color} key={block.id}>
-              <Title>{block.title}</Title>
-              <Text>{block.text}</Text>
+              {block.title && <Title>{block.title}</Title>}
+              {block.text && <Text>{block.text}</Text>}
             </Block>
           ))}
         </div>

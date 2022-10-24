@@ -59,7 +59,7 @@ const Modal = () => {
   }, [title, text, color]);
 
   function closeDialog() {
-    if (text !== '' && title !== '') {
+    if (text !== '' || title !== '') {
       const newBlocks = [...blocks];
       if (activeBlockIndex !== -1) {
         if (localBlock) newBlocks[activeBlockIndex] = localBlock;
