@@ -22,7 +22,7 @@ import {
   modalState,
 } from './state/atoms';
 const App = () => {
-  const blocks = useRecoilValue(blocksState);
+  const [blocks, setBlocks] = useRecoilState(blocksState);
   const activeId = useRecoilValue(activeIdState);
   const modal = useRecoilValue(modalState);
   const colors = useRecoilValue(colorsState);
@@ -40,6 +40,14 @@ const App = () => {
       setFilterColor('');
     }
   }
+
+  useEffect(() => {
+    const item = window.localStorage.getItem('blocks');
+    if (item) {
+      setBlocks(JSON.parse(item));
+    }
+  }, []);
+
   useEffect(() => {
     const text = blocks.filter((block) => {
       if (filter) {

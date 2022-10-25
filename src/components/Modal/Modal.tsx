@@ -8,6 +8,7 @@ import {
   colorsState,
   modalState,
 } from '../../state/atoms';
+import { useBlocks } from '../../state/hooks/useBlocks';
 import { useConfirm } from '../../state/hooks/useConfirm';
 import { useGetNewBlock } from '../../state/hooks/useGetNewBlock';
 import FilterBall from '../FilterBall';
@@ -15,7 +16,7 @@ import styles from './Modal.module.scss';
 
 const Modal = () => {
   const [modal, setModal] = useRecoilState(modalState);
-  const [blocks, setBlocks] = useRecoilState(blocksState);
+  const [blocks, setBlocks] = useBlocks();
   const modalId = useRecoilValue(activeIdState);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
