@@ -8,12 +8,15 @@ import styles from './App.module.scss';
 import Block from './components/Block';
 import Title from './components/Title';
 import Text from './components/Text';
+import ConfirmModal from './components/ConfirmModal';
+
 import { RecoilRoot, useRecoilState, useRecoilValue } from 'recoil';
 import {
   activeIdState,
   blocksState,
   blockType,
   colorsState,
+  confirmModalState,
   filterColorState,
   filterState,
   modalState,
@@ -28,6 +31,7 @@ const App = () => {
   const [filterBlocks, setFilterBlocks] = useState<blockType[]>([]);
   const [inUseColors, setInUseColors] = useState<string[]>([]);
   const active = useRecoilValue(activeIdState);
+  const confirm = useRecoilValue(confirmModalState);
 
   function colorFilter(color: string) {
     if (filterColor !== color) {
@@ -97,6 +101,7 @@ const App = () => {
         </div>
       </main>
       {modal && <Modal />}
+      {confirm.isOpen && <ConfirmModal />}
     </div>
   );
 };

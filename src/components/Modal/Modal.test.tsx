@@ -77,7 +77,7 @@ describe('Dialog', () => {
     expect(blocks.length).toBe(initialLenght);
   });
 
-  it('Should delete block when click delete', () => {
+  it('Should confirm delete block when click delete', () => {
     //Get number of blocks
     let blocks = screen.getAllByRole('notepad');
     const initialLenght = blocks.length;
@@ -89,6 +89,10 @@ describe('Dialog', () => {
     //Click on delete button
     const deleteButton = screen.getByRole('delete-button');
     fireEvent.click(deleteButton);
+
+    //Click on confirm
+    const confirmDelete = screen.getByRole('confirm-button');
+    fireEvent.click(confirmDelete);
 
     //Compare length
     blocks = screen.queryAllByRole('notepad');

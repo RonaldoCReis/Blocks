@@ -8,6 +8,7 @@ import {
   colorsState,
   modalState,
 } from '../../state/atoms';
+import { useConfirm } from '../../state/hooks/useConfirm';
 import { useGetNewBlock } from '../../state/hooks/useGetNewBlock';
 import FilterBall from '../FilterBall';
 import styles from './Modal.module.scss';
@@ -133,7 +134,7 @@ const Modal = () => {
           </div>
           <button
             role="delete-button"
-            onClick={deleteBlock}
+            onClick={useConfirm(deleteBlock)}
             className={styles.delete}
           >
             <Trash size={30} />

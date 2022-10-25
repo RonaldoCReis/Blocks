@@ -18,7 +18,9 @@ export const blocksState = atom<blockType[]>({
     {
       id: 1,
       title: 'Hello!',
-      text: 'Welcome to Blocks',
+      text: `Welcome to Blocks
+      
+Click on the block to edit`,
       color: '#53347B',
     },
   ],
@@ -47,4 +49,12 @@ export const filterState = atom({
 export const filterColorState = atom({
   key: 'filterColorState',
   default: '',
+});
+
+export const confirmModalState = atom({
+  key: 'confirmModalState',
+  default: {
+    isOpen: false,
+    action: () => {},
+  },
 });
