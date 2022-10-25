@@ -27,6 +27,7 @@ const App = () => {
   const [filterColor, setFilterColor] = useRecoilState(filterColorState);
   const [filterBlocks, setFilterBlocks] = useState<blockType[]>([]);
   const [inUseColors, setInUseColors] = useState<string[]>([]);
+  const active = useRecoilValue(activeIdState);
 
   function colorFilter(color: string) {
     if (filterColor !== color) {
@@ -83,7 +84,12 @@ const App = () => {
         <Button>Create block</Button>
         <div className={styles.blocks}>
           {filterBlocks.map((block) => (
-            <Block id={block.id} color={block.color} key={block.id}>
+            <Block
+              id={block.id}
+              color={block.color}
+              key={block.id}
+              active={block.id === active && modal}
+            >
               {block.title && <Title>{block.title}</Title>}
               {block.text && <Text>{block.text}</Text>}
             </Block>

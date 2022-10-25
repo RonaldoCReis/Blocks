@@ -7,9 +7,10 @@ interface blockTypes {
   children: ReactNode;
   color?: string;
   id: number;
+  active: boolean;
 }
 
-const Block = ({ children, color = '#7B7834', id }: blockTypes) => {
+const Block = ({ children, color = '#7B7834', id, active }: blockTypes) => {
   const setModal = useSetRecoilState(modalState);
   const setActive = useSetRecoilState(activeIdState);
   function openDialog() {
@@ -22,7 +23,7 @@ const Block = ({ children, color = '#7B7834', id }: blockTypes) => {
       onClick={openDialog}
       role="notepad"
       style={{ background: color }}
-      className={styles.block}
+      className={`${styles.block} ${active && styles.active}`}
     >
       {children}
     </div>

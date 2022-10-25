@@ -8,4 +8,7 @@
   padding: 30px;
   overflow: auto;
   white-space: pre-wrap;
+  &.active {
+    opacity: 0;
+  }
 }

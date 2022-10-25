@@ -24,6 +24,21 @@ const Modal = () => {
   const [localBlock, setLocalBlock] = useState<blockType | null>(null);
   const colors = useRecoilValue(colorsState);
   const [color, setColor] = useState(colors[0]);
+  const [placeholder, setPlaceholder] = useState<string>('');
+  const placeholders = [
+    'A great idea',
+    'A genius thought',
+    'Gotta remember',
+    'A cake recipe',
+    'My todo list',
+    'Once upon a time',
+  ];
+
+  useEffect(() => {
+    setPlaceholder(
+      placeholders[Math.floor(Math.random() * placeholders.length)] + '...'
+    );
+  }, []);
 
   useEffect(() => {
     console.log('id: ' + modalId);
@@ -91,14 +106,14 @@ const Modal = () => {
           role="title-input"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
-          placeholder="Title"
+          placeholder="New Title"
           className={styles.title}
         ></input>
         <textarea
           role="text-input"
           value={text}
           onChange={(event) => setText(event.target.value)}
-          placeholder="A great idea"
+          placeholder={placeholder}
           className={styles.text}
         ></textarea>
         <div className={styles.footer}>
