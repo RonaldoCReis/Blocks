@@ -26,6 +26,7 @@ const App = () => {
   const filter = useRecoilValue(filterState);
   const [filterColor, setFilterColor] = useRecoilState(filterColorState);
   const [filterBlocks, setFilterBlocks] = useState<blockType[]>([]);
+  const [inUseColors, setInUseColors] = useState<string[]>([]);
 
   function colorFilter(color: string) {
     if (filterColor !== color) {
@@ -55,19 +56,26 @@ const App = () => {
     });
     setFilterBlocks(color);
   }, [filter, blocks, filterColor]);
+
+  useEffect(() => {
+    let activeColors = blocks.map((block) => block.color);
+    activeColors = [...new Set(activeColors)];
+    setInUseColors(activeColors);
+  }, [colors, blocks]);
   return (
     <div className={styles.app}>
       <aside>
         <Logo />
         <div className={styles.filter}>
-          {colors.map((color) => (
-            <FilterBall
-              active={color === filterColor}
-              click={() => colorFilter(color)}
-              key={color}
-              color={color}
-            />
-          ))}
+          {inUseColors.length > 1 &&
+            inUseColors.map((color) => (
+              <FilterBall
+                active={color === filterColor}
+                click={() => colorFilter(color)}
+                key={color}
+                color={color}
+              />
+            ))}
         </div>
       </aside>
       <main className={styles.main}>
