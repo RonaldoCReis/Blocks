@@ -18,7 +18,7 @@ const ConfirmModal = () => {
       >
         <h3 className={styles.title}>Are you sure?</h3>
         <p className={styles.message}>
-          This action will delete your block forever
+          This action will delete this block forever
         </p>
         <div className={styles.buttonContainer}>
           <button
