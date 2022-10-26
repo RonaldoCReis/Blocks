@@ -16,7 +16,7 @@ import styles from './Modal.module.scss';
 
 const Modal = () => {
   const [modal, setModal] = useRecoilState(modalState);
-  const [blocks, setBlocks] = useBlocks();
+  const { blocks, setBlocks } = useBlocks();
   const modalId = useRecoilValue(activeIdState);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
@@ -97,7 +97,14 @@ const Modal = () => {
   }
 
   return (
-    <div onClick={closeDialog} role="dialog" className={styles.backdrop}>
+    <div
+      onClick={closeDialog}
+      role="dialog"
+      className={styles.backdrop}
+      // onKeyDown={(event) =>
+      //   event.key === 'Enter' && !event.shiftKey && closeDialog()
+      // }
+    >
       <div
         style={{ background: localBlock?.color }}
         role="dialog-inner"

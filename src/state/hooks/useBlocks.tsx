@@ -8,5 +8,5 @@ export const useBlocks = () => {
     window.localStorage.setItem('blocks', JSON.stringify(newBlocks));
     setBlocks(newBlocks);
   }
-  return [blocks, setLocalBlocks];
+  return { blocks, setBlocks: setLocalBlocks };
 };
