@@ -95,7 +95,7 @@ const App = () => {
         <Search />
         <Button>Create block</Button>
         <div className={styles.blocks}>
-          {filterBlocks.map((block) => (
+          {filterBlocks.slice(0).reverse().map((block) => (
             <Block
               id={block.id}
               color={block.color}

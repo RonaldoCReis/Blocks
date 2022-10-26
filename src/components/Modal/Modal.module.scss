@@ -99,3 +99,15 @@
     transform: scale(1);
   }
 }
+
+.closeButton{
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 5px;
+  margin: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #fff;
+}

@@ -1,9 +1,8 @@
-import { Trash } from 'phosphor-react';
-import React, { useEffect, useRef, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { Trash, X } from 'phosphor-react';
+import React, { useEffect, useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   activeIdState,
-  blocksState,
   blockType,
   colorsState,
   modalState,
@@ -15,7 +14,7 @@ import FilterBall from '../FilterBall';
 import styles from './Modal.module.scss';
 
 const Modal = () => {
-  const [modal, setModal] = useRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
   const { blocks, setBlocks } = useBlocks();
   const modalId = useRecoilValue(activeIdState);
   const [title, setTitle] = useState('');
@@ -148,6 +147,9 @@ const Modal = () => {
             <Trash size={30} />
           </button>
         </div>
+        <button onClick={closeDialog} className={styles.closeButton}>
+          <X size={30}/>
+        </button>
       </div>
     </div>
   );
